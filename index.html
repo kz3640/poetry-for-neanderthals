@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Poetry for Neanderthals</title>
+  <!-- Link to the compiled Tailwind CSS file -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div id="app" class="w-full max-w-md mx-auto p-4 text-center bg-white rounded-lg shadow-md">
+    <!-- Game Title -->
+    <h1 class="text-3xl font-bold mb-6">Poetry for Neanderthals</h1>
+
+    <!-- Game Controls -->
+    <div id="gameControls" class="space-y-4">
+      <!-- Start Game Button -->
+      <button id="startGame" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 w-full">
+        Start Game
+      </button>
+
+      <!-- Word Display (Initially Hidden) -->
+      <div id="wordDisplay" class="hidden mt-4">
+        <h2 id="word" class="text-2xl font-medium">Your word goes here</h2>
+      </div>
+
+      <!-- Score Display -->
+      <div id="scoreDisplay" class="mt-4 text-lg">
+        <span id="score" class="font-semibold">Score: 0</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Logic -->
+  <script src="js/script.js"></script>
+</body>
+</html>
