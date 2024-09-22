@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', initialize);
 
 document.getElementById('nextWord').addEventListener('click', function() {
   // Example word list (you can expand this)
-  const randomWord1 = words[Math.floor(Math.random() * words.length)];
+  const randomWord = words[Math.floor(Math.random() * words.length)];
   
   // Show the word display and update the word
   document.getElementById('wordDisplay1').classList.remove('hidden');
