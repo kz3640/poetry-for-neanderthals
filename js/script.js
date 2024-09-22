@@ -1,7 +1,7 @@
 document.getElementById('startGame').addEventListener('click', function() {
   // Example word list (you can expand this)
   const words = loadAndCombineJSON();
-  const randomWord = words[Math.floor(Math.random() * words.length)];
+  const randomWord = words[Math.floor(Math.random() * words.length)]["1"];
   
   // Show the word display and update the word
   document.getElementById('wordDisplay').classList.remove('hidden');
@@ -28,7 +28,7 @@ try {
     const data2 = await response2.json();
 
     // Assuming both are arrays, combine them
-    const combinedData = [...data1, ...data2];
+    const combinedData = [...data1.game_data, ...data2.game_data];
 
     console.log(combinedData);
     return combinedData; // You can return or use combinedData as needed
