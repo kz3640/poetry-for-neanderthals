@@ -1,4 +1,4 @@
-document.getElementById('startGame').addEventListener('click', function() {
+document.getElementById('startGame').addEventListener('click', async function() {
   // Example word list (you can expand this)
   const words = await loadAndCombineJSON();
   const randomWord = words[Math.floor(Math.random() * words.length)]["1"];
