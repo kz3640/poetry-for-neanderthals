@@ -1,16 +1,29 @@
-document.getElementById('startGame').addEventListener('click', async function() {
+let words;
+let score = 0;
+
+// Run the initialize function when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', initialize);
+
+document.getElementById('nextWord').addEventListener('click', function() {
   // Example word list (you can expand this)
-  const words = await loadAndCombineJSON();
-  const randomWord = words[Math.floor(Math.random() * words.length)]["1"];
+  const randomWord1 = words[Math.floor(Math.random() * words.length)]["1"];
+  const randomWord3 = words[Math.floor(Math.random() * words.length)]["3"];
   
   // Show the word display and update the word
-  document.getElementById('wordDisplay').classList.remove('hidden');
-  document.getElementById('word').textContent = randomWord;
+  document.getElementById('wordDisplay1').classList.remove('hidden');
+  document.getElementById('word1').textContent = randomWord1;
+  document.getElementById('wordDisplay3').classList.remove('hidden');
+  document.getElementById('word3').textContent = randomWord3;
 
   // Update score (as a placeholder, you can expand this later)
-  document.getElementById('score').textContent = "Score: 1";
+  score++;
+  document.getElementById('score').textContent = `Words Seen: ${score}`;
 });
 
+async function initialize() {
+    words = await loadAndCombineJSON();
+    console.log(words); // You can use the words variable here
+}
 
 async function loadAndCombineJSON() {
     try {
