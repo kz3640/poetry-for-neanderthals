@@ -6,17 +6,21 @@ document.addEventListener('DOMContentLoaded', initialize);
 
 document.getElementById('nextWord').addEventListener('click', function() {
   // Example word list (you can expand this)
-  const randomWord1 = words[Math.floor(Math.random() * words.length)]["1"];
-  const randomWord3 = words[Math.floor(Math.random() * words.length)]["3"];
+  const randomWord1 = words[Math.floor(Math.random() * words.length)];
   
   // Show the word display and update the word
   document.getElementById('wordDisplay1').classList.remove('hidden');
-  document.getElementById('word1').textContent = randomWord1;
+  document.getElementById('word1').textContent = randomWord["1"];
   document.getElementById('wordDisplay3').classList.remove('hidden');
-  document.getElementById('word3').textContent = randomWord3;
+  document.getElementById('word3').textContent = randomWord["3"];
 
   // Update score (as a placeholder, you can expand this later)
   score++;
+  document.getElementById('score').textContent = `Words Seen: ${score}`;
+});
+
+document.getElementById('resetScore').addEventListener('click', function() {
+  score = 0;
   document.getElementById('score').textContent = `Words Seen: ${score}`;
 });
 
