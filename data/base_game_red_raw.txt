@@ -383,7 +383,7 @@ Cinnamon Bun
 Picnic
 Picnic Basket
 Chair
-Rocking Chair 0 
+Rocking Chair
 Paper 
 Paper Cut
 Noise 
