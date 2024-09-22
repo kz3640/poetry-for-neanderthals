@@ -15,8 +15,8 @@ document.getElementById('startGame').addEventListener('click', function() {
 async function loadAndCombineJSON() {
 try {
     const [response1, response2] = await Promise.all([
-        fetch('data/file1.json'),
-        fetch('data/file2.json')
+        fetch('data/base_game_gray.json'),
+        fetch('data/base_game_red.json')
     ]);
 
     // Check if both responses are OK
