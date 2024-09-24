@@ -22,6 +22,7 @@ git clone git@github.com:<your-username>/poetry-for-neanderthals
 - [ ] Implement a word selection feature
 - [ ] Procedurally generated words
 - [ ] Cache seen words
+- [ ] Timer 
 ## Update Features
 - [ ] Expand the word list
 - [ ] Better looking site
