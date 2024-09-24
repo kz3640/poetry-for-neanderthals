@@ -1,23 +1,39 @@
 let words;
 let score = 0;
+let current_word = 0;
 
 // Run the initialize function when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', initialize);
 
-document.getElementById('nextWord').addEventListener('click', function() {
-  // Example word list (you can expand this)
-  const randomWord = words[Math.floor(Math.random() * words.length)];
-  
-  // Show the word display and update the word
-  document.getElementById('wordDisplay1').classList.remove('hidden');
-  document.getElementById('word1').textContent = randomWord["1"];
-  document.getElementById('wordDisplay3').classList.remove('hidden');
-  document.getElementById('word3').textContent = randomWord["3"];
-
-  // Update score (as a placeholder, you can expand this later)
-  score++;
-  document.getElementById('score').textContent = `Words Seen: ${score}`;
+document.getElementById('score-1').addEventListener('click', function() {
+    updateWords();
+    score--;
+    document.getElementById('score').textContent = `Score: ${score}`;
 });
+
+document.getElementById('score+1').addEventListener('click', function() {
+    updateWords();
+    score++;
+    document.getElementById('score').textContent = `Score: ${score}`;
+});
+
+document.getElementById('score+3').addEventListener('click', function() {
+    updateWords();
+    score+=3;
+    document.getElementById('score').textContent = `Score: ${score}`;
+});
+
+document.getElementById('reset-score').addEventListener('click', function() {
+    updateWords();
+    score=0;
+    document.getElementById('score').textContent = `Score: ${score}`;
+});
+
+function updateWords() {
+  document.getElementById('word1').textContent = words[current_word % words.length]["1"];
+  document.getElementById('word3').textContent = words[current_word % words.length]["3"];
+  current_word++;
+}
 
 document.getElementById('resetScore').addEventListener('click', function() {
   score = 0;
@@ -26,8 +42,24 @@ document.getElementById('resetScore').addEventListener('click', function() {
 
 async function initialize() {
     words = await loadAndCombineJSON();
-    console.log(words); // You can use the words variable here
+    shuffle(words);
 }
+
+function shuffle(array) {
+    let currentIndex = array.length;
+  
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+  
+      // Pick a remaining element...
+      let randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  }
 
 async function loadAndCombineJSON() {
     try {
