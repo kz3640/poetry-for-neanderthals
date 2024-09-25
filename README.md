@@ -8,6 +8,7 @@ Verses For Cave Men is an unofficial companion site for the party game Poetry fo
 
 # How to Contribute
 1. Fork the Repository
+
 Click on the "Fork" button at the top right of the repository page to create your own copy.
 2. Clone Your Fork
 ```
