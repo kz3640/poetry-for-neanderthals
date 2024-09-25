@@ -35,11 +35,6 @@ function updateWords() {
   current_word++;
 }
 
-document.getElementById('resetScore').addEventListener('click', function() {
-  score = 0;
-  document.getElementById('score').textContent = `Words Seen: ${score}`;
-});
-
 async function initialize() {
     words = await loadAndCombineJSON();
     shuffle(words);
