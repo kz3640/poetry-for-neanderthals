@@ -43,6 +43,8 @@ document.getElementById('resetScore').addEventListener('click', function() {
 async function initialize() {
     words = await loadAndCombineJSON();
     shuffle(words);
+    document.getElementById('word1').textContent = words[current_word % words.length]["1"];
+    document.getElementById('word3').textContent = words[current_word % words.length]["3"];
 }
 
 function shuffle(array) {
