@@ -1,6 +1,15 @@
+/**
+ * TODO:
+ * track which team is playing
+ * make timer work
+ * change reset button to pause button
+ * after time runs out, add button to start next team
+ * maybe add a countdown before the game starts? idk
+ */
+
 let words;
-let score = 0;
-let current_word = 0;
+let score_glad = score_mad = score = current_word = 0;
+let timer;
 
 // Run the initialize function when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', initialize);
@@ -19,15 +28,26 @@ document.getElementById('score+1').addEventListener('click', function() {
 
 document.getElementById('score+3').addEventListener('click', function() {
     updateWords();
-    score+=3;
+    score += 3;
     document.getElementById('score').textContent = `Score: ${score}`;
 });
 
 document.getElementById('reset-score').addEventListener('click', function() {
     updateWords();
-    score=0;
+    score = 0;
     document.getElementById('score').textContent = `Score: ${score}`;
 });
+
+document.getElementById('start-game-60').addEventListener('click', function() {
+    updateWords();
+    score = 0;
+    document.getElementById('score').textContent = `Score: ${score}`;
+});
+
+function startGame(duration) {
+    timer = duration;
+    //TODO
+}
 
 function updateWords() {
   document.getElementById('word1').textContent = words[current_word % words.length]["1"];
