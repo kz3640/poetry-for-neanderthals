@@ -18,16 +18,3 @@ git clone git@github.com:<your-username>/poetry-for-neanderthals
 3. Push your changes
 
 4. Submit a PR
-
-# TODO
-## New Features
-- [ ] Add score tracking for each team
-- [ ] Implement a word selection feature
-- [ ] Procedurally generated words
-- [ ] Cache seen words
-- [ ] Timer 
-## Update Features
-- [ ] Expand the word list
-- [ ] Better looking site
-
-      
