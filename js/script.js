@@ -59,24 +59,24 @@ function shuffle(array) {
 
 async function loadAndCombineJSON() {
     try {
-        const [response1, response2] = await Promise.all([
+        const [response1, response2, response3, response4] = await Promise.all([
             fetch('data/base_game_gray.json'),
-            fetch('data/base_game_red.json')
+            fetch('data/base_game_red.json'),
+            fetch('data/1st_expansion_pack_gray.json'),
+            fetch('data/1st_expansion_pack_red.json')
         ]);
     
         // Check if both responses are OK
-        if (!response1.ok || !response2.ok) {
+        if (!response1.ok || !response2.ok || !response3.ok || !response4.ok) {
             throw new Error('Failed to load JSON files');
         }
     
         const data1 = await response1.json();
         const data2 = await response2.json();
-    
-        console.log('Data1:', data1);
-        console.log('Data2:', data2);
-    
-        // Assuming both are arrays, combine them
-        const combinedData = [...data1.game_data, ...data2.game_data];
+        const data3 = await response3.json();
+        const data4 = await response4.json();
+
+        const combinedData = [...data1.game_data, ...data2.game_data, ...data3.game_data, ...data4.game_data];
     
         console.log(combinedData);
         return combinedData; // You can return or use combinedData as needed
