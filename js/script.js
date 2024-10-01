@@ -9,28 +9,35 @@
 
 let words;
 let score_glad = score_mad = score = current_word = 0;
-let maxTimer;
+let max_timer;
 let timer;
+let game_running = false;
 
 // Run the initialize function when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', initialize);
 
 document.getElementById('score-1').addEventListener('click', function() {
-    updateWords();
-    score--;
-    document.getElementById('score').textContent = `Score: ${score}`;
+    if(game_running) {
+        updateWords();
+        score--;
+        document.getElementById('score').textContent = `Score: ${score}`;
+    }
 });
 
 document.getElementById('score+1').addEventListener('click', function() {
-    updateWords();
-    score++;
-    document.getElementById('score').textContent = `Score: ${score}`;
+    if(game_running) {
+        updateWords();
+        score++;
+        document.getElementById('score').textContent = `Score: ${score}`;
+    }
 });
 
 document.getElementById('score+3').addEventListener('click', function() {
-    updateWords();
-    score += 3;
-    document.getElementById('score').textContent = `Score: ${score}`;
+    if(game_running) {
+        updateWords();
+        score += 3;
+        document.getElementById('score').textContent = `Score: ${score}`;
+    }
 });
 
 document.getElementById('reset-score').addEventListener('click', function() {
@@ -61,8 +68,9 @@ document.getElementById('start-game-custom').addEventListener('click', function(
 function startGame(duration) {
     updateWords();
     
+    game_running = true;
     timer = duration;
-    maxTimer = duration;
+    max_timer = duration;
     score = 0;
     document.getElementById('score').textContent = `Score: ${score}`;
     
@@ -77,10 +85,12 @@ function startGame(duration) {
 
 function resetGame() {
     updateWords();
-    timer = maxTimer;
+    game_running = true;
+    timer = max_timer;
     score = 0;
     document.getElementById('timer-display').textContent = `Time: ${timer}s`;
     document.getElementById('score').textContent = `Score: ${score}`;
+    startCountdown();
 }
 
 function startCountdown() {
@@ -93,7 +103,7 @@ function startCountdown() {
 
         if (timer <= 0) {
             clearInterval(countdownInterval); // Stop the countdown
-            endGame(); // Call the function to handle the end of the game
+            game_running = false;
         }
     }, 1000); // Update every second
 }
