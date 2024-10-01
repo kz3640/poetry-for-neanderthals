@@ -1,33 +1,109 @@
+/**
+ * TODO:
+ * after time runs out, add button to start next team
+ * maybe add a countdown before the game starts? idk
+ */
+
 let words;
-let score = 0;
-let current_word = 0;
+let score_glad = score_mad = score = current_word = 0;
+let max_timer;
+let timer;
+let game_running = false;
 
 // Run the initialize function when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', initialize);
 
 document.getElementById('score-1').addEventListener('click', function() {
-    updateWords();
-    score--;
-    document.getElementById('score').textContent = `Score: ${score}`;
+    if(game_running) {
+        updateWords();
+        score--;
+        document.getElementById('score').textContent = `Score: ${score}`;
+    }
 });
 
 document.getElementById('score+1').addEventListener('click', function() {
-    updateWords();
-    score++;
-    document.getElementById('score').textContent = `Score: ${score}`;
+    if(game_running) {
+        updateWords();
+        score++;
+        document.getElementById('score').textContent = `Score: ${score}`;
+    }
 });
 
 document.getElementById('score+3').addEventListener('click', function() {
-    updateWords();
-    score+=3;
-    document.getElementById('score').textContent = `Score: ${score}`;
+    if(game_running) {
+        updateWords();
+        score += 3;
+        document.getElementById('score').textContent = `Score: ${score}`;
+    }
 });
 
 document.getElementById('reset-score').addEventListener('click', function() {
-    updateWords();
-    score=0;
-    document.getElementById('score').textContent = `Score: ${score}`;
+    resetGame();
 });
+
+document.getElementById('start-game-60').addEventListener('click', function() {
+    startGame(60);
+});
+
+document.getElementById('start-game-custom').addEventListener('click', function() {
+    const custom_time = parseInt(document.getElementById('custom-time').value, 10);
+    const inputElement = document.getElementById('custom-time');
+    
+    if (custom_time < 1 || Number.isNaN(custom_time)) {
+        inputElement.style.transition = '';
+        inputElement.classList.add('bg-red-200');
+
+        setTimeout(() => {
+            inputElement.style.transition = 'background-color 1s ease, border-color 1s ease';
+            inputElement.classList.remove('bg-red-200');
+        }, 300);
+    } else {
+        startGame(custom_time);
+    }
+});
+
+function startGame(duration) {
+    updateWords();
+    
+    game_running = true;
+    timer = duration;
+    max_timer = duration;
+    score = 0;
+    document.getElementById('score').textContent = `Score: ${score}`;
+    
+    const timer_menu = document.getElementById('timer-menu');
+    timer_menu.classList.add('hidden');
+    const game_screen = document.getElementById('game-screen');
+    game_screen.classList.remove('hidden');
+    
+    // Start the countdown
+    startCountdown();
+}
+
+function resetGame() {
+    updateWords();
+    game_running = true;
+    timer = max_timer;
+    score = 0;
+    document.getElementById('timer-display').textContent = `Time: ${timer}s`;
+    document.getElementById('score').textContent = `Score: ${score}`;
+    startCountdown();
+}
+
+function startCountdown() {
+    // Display the initial time
+    document.getElementById('timer-display').textContent = `Time: ${timer}s`;
+
+    countdownInterval = setInterval(() => {
+        timer--;
+        document.getElementById('timer-display').textContent = `Time: ${timer}s`;
+
+        if (timer <= 0) {
+            clearInterval(countdownInterval); // Stop the countdown
+            game_running = false;
+        }
+    }, 1000); // Update every second
+}
 
 function updateWords() {
   document.getElementById('word1').textContent = words[current_word % words.length]["1"];
@@ -44,14 +120,14 @@ async function initialize() {
 function shuffle(array) {
     let currentIndex = array.length;
   
-    // While there remain elements to shuffle...
+    // While there remain elements to shuffle
     while (currentIndex != 0) {
   
-      // Pick a remaining element...
+      // Pick a remaining element
       let randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
   
-      // And swap it with the current element.
+      // Swap
       [array[currentIndex], array[randomIndex]] = [
         array[randomIndex], array[currentIndex]];
     }

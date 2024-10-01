@@ -8,11 +8,27 @@
 </head>
 <body class="flex items-center justify-center h-screen bg-gray-50">
 
-    <div class="border border-gray-200 rounded-lg shadow-lg w-96 bg-white">
+    <!-- Timer Selection Menu -->
+    <div id="timer-menu" class="border border-gray-200 rounded-lg shadow-lg w-96 bg-white">
+        <div class="p-4">
+            <h1 class="text-center text-xl font-bold mb-4">Select Timer Length</h1>
+            <div class="grid grid-cols-1 gap-2">
+                <button id="start-game-60" class="bg-blue-100 text-blue-600 font-semibold hover:bg-blue-200 transition duration-300 p-2 focus:outline-none">60 Seconds</button>
+
+                <!-- Custom Timer -->
+                <div class="flex items-center space-x-2">
+                    <input type="number" id="custom-time" placeholder="Time in Seconds" class="border p-2 w-full focus:outline-none">
+                    <button id="start-game-custom" class="bg-green-100 text-green-600 font-semibold hover:bg-green-200 transition duration-300 p-2 focus:outline-none">Start</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Game Screen (hidden initially) -->
+    <div id="game-screen" class="border border-gray-200 rounded-lg shadow-lg w-96 bg-white hidden">
         <!-- Top section -->
         <div class="grid grid-cols-3 border-b border-gray-200 p-4">
             <div class="flex flex-col justify-between">
-                <!-- todo team names here -->
                 <span id="reset-score" class="text-gray-500 font-semibold hover:text-black transition duration-300 cursor-pointer">Reset Score</span>
                 <span id="score" class="self-start text-lg font-bold text-gray-800">Score: 0</span>
             </div>
@@ -21,7 +37,7 @@
                 <span id="word3" class="text-lg font-bold text-green-500 text-center break-words">Word2</span>
             </div>
             <div class="flex justify-end">
-                <span class="text-gray-500 font-semibold">Timer (todo)</span>
+                <span id="timer-display" class="text-lg font-bold text-gray-800">Timer: 0</span>
             </div>
         </div>
 
@@ -42,8 +58,7 @@
         </div>
     </div>
 
-
-  <!-- JavaScript Logic -->
-  <script src="js/script.js"></script>
+    <!-- JavaScript Logic -->
+    <script src="js/script.js"></script>
 </body>
 </html>
