@@ -9,6 +9,7 @@
 
 let words;
 let score_glad = score_mad = score = current_word = 0;
+let maxTimer;
 let timer;
 
 // Run the initialize function when the DOM is fully loaded
@@ -33,20 +34,68 @@ document.getElementById('score+3').addEventListener('click', function() {
 });
 
 document.getElementById('reset-score').addEventListener('click', function() {
-    updateWords();
-    score = 0;
-    document.getElementById('score').textContent = `Score: ${score}`;
+    resetGame();
 });
 
 document.getElementById('start-game-60').addEventListener('click', function() {
-    updateWords();
-    score = 0;
-    document.getElementById('score').textContent = `Score: ${score}`;
+    startGame(60);
+});
+
+document.getElementById('start-game-custom').addEventListener('click', function() {
+    const custom_time = parseInt(document.getElementById('custom-time').value, 10);
+    const inputElement = document.getElementById('custom-time');
+    
+    if (custom_time < 1 || Number.isNaN(custom_time)) {
+        inputElement.style.transition = '';
+        inputElement.classList.add('bg-red-200');
+
+        setTimeout(() => {
+            inputElement.style.transition = 'background-color 1s ease, border-color 1s ease';
+            inputElement.classList.remove('bg-red-200');
+        }, 300);
+    } else {
+        startGame(custom_time);
+    }
 });
 
 function startGame(duration) {
+    updateWords();
+    
     timer = duration;
-    //TODO
+    maxTimer = duration;
+    score = 0;
+    document.getElementById('score').textContent = `Score: ${score}`;
+    
+    const timer_menu = document.getElementById('timer-menu');
+    timer_menu.classList.add('hidden');
+    const game_screen = document.getElementById('game-screen');
+    game_screen.classList.remove('hidden');
+    
+    // Start the countdown
+    startCountdown();
+}
+
+function resetGame() {
+    updateWords();
+    timer = maxTimer;
+    score = 0;
+    document.getElementById('timer-display').textContent = `Time: ${timer}s`;
+    document.getElementById('score').textContent = `Score: ${score}`;
+}
+
+function startCountdown() {
+    // Display the initial time
+    document.getElementById('timer-display').textContent = `Time: ${timer}s`;
+
+    countdownInterval = setInterval(() => {
+        timer--;
+        document.getElementById('timer-display').textContent = `Time: ${timer}s`;
+
+        if (timer <= 0) {
+            clearInterval(countdownInterval); // Stop the countdown
+            endGame(); // Call the function to handle the end of the game
+        }
+    }, 1000); // Update every second
 }
 
 function updateWords() {
@@ -64,14 +113,14 @@ async function initialize() {
 function shuffle(array) {
     let currentIndex = array.length;
   
-    // While there remain elements to shuffle...
+    // While there remain elements to shuffle
     while (currentIndex != 0) {
   
-      // Pick a remaining element...
+      // Pick a remaining element
       let randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
   
-      // And swap it with the current element.
+      // Swap
       [array[currentIndex], array[randomIndex]] = [
         array[randomIndex], array[currentIndex]];
     }
