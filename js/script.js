@@ -1,8 +1,5 @@
 /**
  * TODO:
- * track which team is playing
- * make timer work
- * change reset button to pause button
  * after time runs out, add button to start next team
  * maybe add a countdown before the game starts? idk
  */
